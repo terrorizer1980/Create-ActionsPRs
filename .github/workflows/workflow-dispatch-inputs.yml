@@ -27,6 +27,6 @@ jobs:
 
     steps:
       - run: |
-          echo "Log level: ${{ github.event.inputs.logLevel }}
-          echo "Tags: ${{ github.event.inputs.tags }}
-          echo "Environment: ${{ github.event.inputs.environment }}
+          echo "Log level: ${{ github.event.inputs.logLevel }}"
+          echo "Tags: ${{ github.event.inputs.tags }}"
+          echo "Environment: ${{ github.event.inputs.environment }}"
