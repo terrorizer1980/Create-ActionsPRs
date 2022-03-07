@@ -1,0 +1,33 @@
+name: "build"
+on: [push]
+
+jobs:
+  build-application: 
+    name: Builds the Next.js application.
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 1 - Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: 2 - Use the Node.js version specified in the .nvmrc file
+        uses: actions/setup-node@v2
+        with:
+          node-version-file: '.nvmrc'
+          registry-url: https://registry.npmjs.org/
+
+      - name: 3 - Install dependencies
+        run: npm install
+      
+      - name: 4 - Build the application
+        run: npm run build
+
+      - name: 5 - Run tests
+        run: npm test
+        env:
+          CI: true
+          FORCE_COLOR: 1
+
+  call-deployment-workflow:
+    needs: build-application
+    uses: ./.github/workflows/deploy.yml
